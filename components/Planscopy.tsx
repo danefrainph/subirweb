@@ -32,7 +32,6 @@ export default function Plans() {
           <article className="plan-card" key={p.title}>
             <img src={p.image} alt={p.title}/>
             <h3>{p.title}</h3>
-            <p className="price">{p.price}</p>
             <ul>
               {p.features.map((f)=> <li key={f}>{f}</li>)}
             </ul>
