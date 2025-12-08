@@ -1,26 +1,174 @@
-@import "tailwindcss";
+/* Outfit desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root{
+  --accent:#000000; /* color principal negro */
+  --bg-very-light:#fbfbfb; /* gris casi blanco */
+  --muted:#666;
+  --max-width:1200px;
+  font-family: 'Outfit', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Reset base */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  color:#111;
+  background:#ffffff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Contenedor central */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:36px 20px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Header */
+.site-header{
+  background:#fff; /* fondo blanco para que links y botón se vean */
+  border-bottom:1px solid rgba(0, 0, 0, 0.06);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+}
+.brand a{
+  font-weight:700;
+  text-decoration:none;
+  color:#000;
+  font-size:18px;
+}
+nav a{
+  margin-left:16px;
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:500;
+}
+nav a:hover{ color:#000; }
+
+/* Botón del header (visible) */
+nav a.primary{
+  background:#000;    /* negro */
+  color:#fff;         /* texto blanco */
+  padding:8px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  margin-left:20px;
+  display:inline-block;
+}
+
+/* HERO: fondo negro, texto blanco, botón blanco con letras negras */
+.hero{
+  background:#000; /* fondo negro */
+  color:#fff;
+  padding:64px 0;
+}
+.hero-inner{
+  display:flex;
+  gap:28px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+.hero-text{ flex:1 1 420px; min-width:280px; }
+.hero-text h1{
+  font-size:44px;
+  line-height:1.02;
+  margin:0 0 12px;
+  letter-spacing:-0.6px;
+  font-weight:800;
+}
+.lead{
+  font-size:16px;
+  color:rgba(255,255,255,0.85);
+  margin-bottom:18px;
+}
+/* Botón grande del hero: fondo blanco y texto negro */
+.hero .button.large{
+  background:#fff;
+  color:#000;
+  padding:14px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-block;
+}
+
+/* Imagen del hero: más grande y responsiva */
+.hero-image{
+  flex:0 0 480px; /* ancho máximo inicial */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.hero-image img{
+  width:100%;
+  max-width:520px;
+  height:auto;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35); /* sombra pronunciada tipo maqueta */
+}
+
+/* Secciones generales */
+section.container{ padding-top:48px; padding-bottom:48px; }
+
+/* Plans / tarjetas: sombras suaves como en el PDF */
+.plans .plan-grid{
+  display:grid;
+  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  margin-top:18px;
+}
+.plan-card{
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06); /* sombra suave */
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.plan-card:hover{ transform:translateY(-6px); box-shadow: 0 22px 44px rgba(0,0,0,0.09); }
+.plan-card img{ width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:12px; }
+.price{ font-size:20px; font-weight:700; margin:8px 0; }
+
+/* 'Nuestros sitios' tarjetas (como ejemplos): sombra más marcada */
+.examples .site-item{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.12); /* sombra parecida al PDF */
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.examples .site-item img{ width:100px; height:70px; object-fit:cover; border-radius:8px; }
+
+/* Footer con fondo gris muy claro (diferente del blanco del body) */
+.site-footer{
+  background:#000000;
+  color: #fff;
+  border-top:1px solid rgba(0,0,0,0.04);
+  padding:34px 0;
+  margin-top:40px;
+}
+.footer-grid{ display:flex; gap:28px; flex-wrap:wrap; }
+.site-footer h4{ margin:0 0 8px; }
+
+/* Responsive: ajustar hero para pantallas chicas */
+@media (max-width:880px){
+  .hero-inner{ flex-direction:column-reverse; text-align:center; }
+  .hero-image{ flex:1 1 100%; max-width:420px; margin-bottom:18px; }
+  .hero-text h1{ font-size:32px; }
 }
